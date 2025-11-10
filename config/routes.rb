@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :spaces do
     resources :users, only: %i[index new create edit update destroy], controller: "spaces/users"
     resources :roles, controller: "spaces/roles"
+    resources :structures, controller: "spaces/structures"
     resources :subscriptions, controller: "spaces/subscriptions"
   end
 

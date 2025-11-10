@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_21_114838) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_10_135647) do
   create_table "app_settings", force: :cascade do |t|
     t.string "key", null: false
     t.string "value", null: false
@@ -46,6 +46,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_21_114838) do
     t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "structures", force: :cascade do |t|
+    t.integer "space_id", null: false
+    t.string "name"
+    t.text "content"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["space_id"], name: "index_structures_on_space_id"
   end
 
   create_table "subscriptions", force: :cascade do |t|
@@ -94,4 +104,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_21_114838) do
   end
 
   add_foreign_key "roles", "spaces"
+  add_foreign_key "structures", "spaces"
 end

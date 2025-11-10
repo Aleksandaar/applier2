@@ -1,0 +1,28 @@
+<%= form_with(model: [@space, structure]) do |form| %>
+    <div class="form-group mb-3 row">
+      <%= form.label :name, class: "form-label col-3 col-form-label" %>
+    <div class="col">
+      <%= form.text_field :name, class:"form-control" %>
+    </div>
+  
+  </div>
+    <div class="form-group mb-3 row">
+      <%= form.label :content, class: "form-label col-3 col-form-label" %>
+    <div class="col">
+      <%= form.textarea :content, class:"form-control" %>
+    </div>
+  
+  </div>
+    <div class="form-group mb-3 row">
+      <%= form.label :status, class: "form-label col-3 col-form-label" %>
+    <div class="col">
+      <%= form.number_field :status, class:"form-control" %>
+    </div>
+  
+  </div>
+  
+  <div class="form-footer">
+    <%= form.submit "Save", class:"btn btn-primary" %>
+    <%= link_to "Cancel", space_structures_path(@space), data: { turbo_frame: '_top'}, class: "btn" %>
+  </div>
+<% end %>       
