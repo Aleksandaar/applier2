@@ -26,6 +26,17 @@
           </div>
         </div>
       </div>
+
+      <% if @structure.present? && @structure.persisted? %>
+        <div class="collapse navbar-collapse" id="navbar-menu">
+          <div class="navbar navbar-light">
+            <div class="container-xl">
+              <%= render 'common/nav_items_structure' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
     </div>
     <div class="page-wrapper">
       <div class="container-xl">

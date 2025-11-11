@@ -17,6 +17,13 @@
         <div class="collapse navbar-collapse" id="navbar-menu">
           <%= render 'common/nav_items' %>
         </div>
+
+        <% if @structure.present? && @structure.persisted? %>
+          <div class="collapse navbar-collapse" id="navbar-menu">
+            <%= render 'common/nav_items_structure' %>
+          </div>
+        <% end %>
+
       </div>
     </header>
     <div class="page-wrapper">

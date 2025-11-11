@@ -20,6 +20,12 @@
             <%= render 'common/space_selector' %>
           </div>
         </div>
+
+        <% if @structure.present? && @structure.persisted? %>
+          <div class="collapse navbar-collapse" id="navbar-menu">
+            <%= render 'common/nav_items_structure' %>
+          </div>
+        <% end %>
       </div>
     </aside>
     <div class="page-wrapper">
