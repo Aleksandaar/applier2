@@ -1,0 +1,41 @@
+<% content_for :page_pretitle do %>
+  Space structure form field / settings
+<% end %>
+<% content_for :page_title do %>
+  <%= @form_field&.id || "Edit" %>
+<% end %>
+
+<%= turbo_frame_tag(@form_field) do %>
+  <div class="card border">
+    <div class="row g-0">
+      <div class="col-3 d-none d-md-block border-end">
+        <div class="card-body">
+          <h4 class="subheader">General</h4>
+          <div class="list-group list-group-transparent flex-column nav nav-form_field-settings" id="form_field-settings-tab" role="tablist" aria-orientation="vertical">
+            <button class="list-group-item list-group-item-action d-flex align-items-center nav-link active"
+            id="form_field-details-tab" data-bs-toggle="tab" data-bs-target="#form_field-details" type="button" role="tab" aria-controls="form_field-details" aria-selected="true">
+              Details
+              <small class="text-muted ms-auto">4</small>
+            </button>
+            <button class="list-group-item list-group-item-action d-flex align-items-center nav-link"
+            id="form_field-restricted-tab" data-bs-toggle="tab" data-bs-target="#form_field-restricted" type="button" role="tab" aria-controls="form_field-restricted" aria-selected="false">
+              Restricted
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col d-flex flex-column">
+        <div class="card-body tab-content" id="form_field-settings-tabContent">
+          <div class="tab-pane show active" id="form_field-details" role="tabpanel" aria-labelledby="form_field-details-tab" tabindex="0">
+            <h2 class="mb-4">Details</h2>
+            <%= render "form", form_field: @form_field %>
+          </div>
+        <div class="tab-pane" id="form_field-restricted" role="tabpanel" aria-labelledby="form_field-restricted-tab" tabindex="0">
+          <h2 class="mb-4">Restricted</h2>
+            <%= button_to "Destroy this form field", space_structure_form_field_path(@space, @structure, @form_field), method: :delete, form: {data: {confirm: 'Are you sure?', turbo: false}}, class: "btn btn-danger" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

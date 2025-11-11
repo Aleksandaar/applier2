@@ -10,13 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_10_135647) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_11_112808) do
   create_table "app_settings", force: :cascade do |t|
     t.string "key", null: false
     t.string "value", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["key"], name: "index_app_settings_on_key", unique: true
+  end
+
+  create_table "form_fields", force: :cascade do |t|
+    t.integer "structure_id", null: false
+    t.integer "field_type"
+    t.integer "position"
+    t.boolean "required"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["structure_id"], name: "index_form_fields_on_structure_id"
   end
 
   create_table "plans", force: :cascade do |t|
@@ -103,6 +113,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_10_135647) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "form_fields", "structures"
   add_foreign_key "roles", "spaces"
   add_foreign_key "structures", "spaces"
 end
