@@ -28,7 +28,7 @@ Space structure form fields
           <table class="table table-vcenter table-mobile-md card-table">
             <thead>
               
-                <th>Structure</th>
+                <th>Label</th>
               
                 <th>Field type</th>
               
@@ -42,8 +42,8 @@ Space structure form fields
               <% @form_fields.each do |form_field| %>
               <tr id='<%= dom_id(form_field)%>'>
                 
-                  <td class="text-muted" data-label="Structure">
-                    <%= form_field.structure_id %>
+                  <td class="text-muted" data-label="Label">
+                    <%= form_field.label %>
                   </td>
                 
                   <td class="text-muted" data-label="Field type">

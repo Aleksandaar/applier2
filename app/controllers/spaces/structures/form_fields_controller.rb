@@ -3,7 +3,7 @@ class Spaces::Structures::FormFieldsController < ApplicationController
   before_action :set_form_field, only: %i[ show edit update destroy ]
 
   def index
-    @form_fields = FormField.all.page params[:page]
+    @form_fields = @structure.form_fields.page params[:page]
   end
 
   def show
@@ -17,7 +17,7 @@ class Spaces::Structures::FormFieldsController < ApplicationController
   end
 
   def create
-    @form_field = FormField.new(form_field_params)
+    @form_field = @structure.form_fields.new(form_field_params)
 
     if @form_field.save
       redirect_to space_structure_form_fields_path, notice: "Form field was successfully created."
@@ -56,6 +56,6 @@ class Spaces::Structures::FormFieldsController < ApplicationController
     end
 
     def form_field_params
-      params.expect(form_field: [ :structure_id, :field_type, :position, :required ])
+      params.expect(form_field: [ :label, :field_type, :position, :required ])
     end
 end

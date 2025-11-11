@@ -21,9 +21,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_11_112808) do
 
   create_table "form_fields", force: :cascade do |t|
     t.integer "structure_id", null: false
-    t.integer "field_type"
-    t.integer "position"
-    t.boolean "required"
+    t.string "label"
+    t.integer "field_type", default: 0
+    t.integer "position", default: 0
+    t.boolean "required", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["structure_id"], name: "index_form_fields_on_structure_id"
