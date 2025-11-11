@@ -1,0 +1,41 @@
+<% content_for :page_pretitle do %>
+  Answer / settings
+<% end %>
+<% content_for :page_title do %>
+  <%= @answer&.id || "Edit" %>
+<% end %>
+
+<%= turbo_frame_tag(@answer) do %>
+  <div class="card border">
+    <div class="row g-0">
+      <div class="col-3 d-none d-md-block border-end">
+        <div class="card-body">
+          <h4 class="subheader">General</h4>
+          <div class="list-group list-group-transparent flex-column nav nav-answer-settings" id="answer-settings-tab" role="tablist" aria-orientation="vertical">
+            <button class="list-group-item list-group-item-action d-flex align-items-center nav-link active"
+            id="answer-details-tab" data-bs-toggle="tab" data-bs-target="#answer-details" type="button" role="tab" aria-controls="answer-details" aria-selected="true">
+              Details
+              <small class="text-muted ms-auto">4</small>
+            </button>
+            <button class="list-group-item list-group-item-action d-flex align-items-center nav-link"
+            id="answer-restricted-tab" data-bs-toggle="tab" data-bs-target="#answer-restricted" type="button" role="tab" aria-controls="answer-restricted" aria-selected="false">
+              Restricted
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col d-flex flex-column">
+        <div class="card-body tab-content" id="answer-settings-tabContent">
+          <div class="tab-pane show active" id="answer-details" role="tabpanel" aria-labelledby="answer-details-tab" tabindex="0">
+            <h2 class="mb-4">Details</h2>
+            <%= render "form", answer: @answer %>
+          </div>
+        <div class="tab-pane" id="answer-restricted" role="tabpanel" aria-labelledby="answer-restricted-tab" tabindex="0">
+          <h2 class="mb-4">Restricted</h2>
+            <%= button_to "Destroy this answer", @answer, method: :delete, form: {data: {confirm: 'Are you sure?', turbo: false}}, class: "btn btn-danger" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

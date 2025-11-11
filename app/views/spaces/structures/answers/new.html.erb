@@ -1,0 +1,24 @@
+<% content_for :page_pretitle do %>
+  Answer / settings
+<% end %>
+<% content_for :page_title do %>
+  New
+<% end %>
+
+<%= turbo_frame_tag(@answer) do %>
+  <div class="card border">
+    <div class="row g-0">
+      <div class="col d-flex flex-column">
+        <div class="card-body tab-content" id="answer-settings-tabContent">
+          <div class="tab-pane show active" id="answer-details" role="tabpanel" aria-labelledby="answer-details-tab" tabindex="0">
+            <h2 class="mb-4"><%= @structure.name %></h2>
+            <p>
+              <%= @structure.content %>
+            </p>
+            <%= render "form", answer: @answer %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,42 @@
+<%= form_with(model: [@space, @structure, answer]) do |form| %>
+  <%= form.fields_for :form_data do |ff| %>
+    <div class="form-group mb-3 row">
+      <%= ff.label :email, "Email *", class: "form-label" %>
+      <div class="col">
+        <%= ff.text_field :email, value: answer.form_data["email"], class:"form-control" %>
+        <% if answer.errors[:form_data].any? && (error_text = answer.errors[:form_data].find { |word| word.include?("email is") }) %>
+          <div class="invalid-feedback d-block">
+            <%= error_text %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+      
+    <% @structure.form_fields.present? && @structure.form_fields.order(:position).each do |field| %>
+      <div class="form-group mb-3 row">
+          <%= form.label field.id, "#{field.label} #{'*' if field.required?}" , class: "form-label" %>
+        <div class="col">
+          <% if field.string? %>
+            <%= ff.text_field field.sanitized_label, value: answer.form_data[field.label], class:"form-control" %>
+          <% end %>
+          <% if field.text? %>
+            <%= ff.textarea field.sanitized_label, value: answer.form_data[field.label], class:"form-control" %>
+          <% end %>
+          <% if field.boolean? %>
+            <%= ff.check_box field.sanitized_label, {class:"form-check-input"}, true, false %>
+          <% end %>
+          <% if answer.errors[:form_data].any? && (error_text = answer.errors[:form_data].find { |word| word.include?(field.sanitized_label) }) %>
+            <div class="invalid-feedback d-block">
+              This field <%= error_text.gsub(field.label, "") %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+   <% end %>
+  </div>
+  
+  <div class="form-footer">
+    <%= form.submit "Submit", class:"btn btn-primary" %>
+  </div>
+<% end %>       

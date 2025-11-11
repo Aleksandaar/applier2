@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :roles, controller: "spaces/roles"
     resources :structures, controller: "spaces/structures" do
       resources :form_fields, controller: "spaces/structures/form_fields"
+      resources :answers, controller: "spaces/structures/answers"
     end
     resources :subscriptions, controller: "spaces/subscriptions"
   end

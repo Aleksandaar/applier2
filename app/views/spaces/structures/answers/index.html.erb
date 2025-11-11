@@ -1,0 +1,56 @@
+<% content_for :page_pretitle do %>
+Answers
+<% end %>
+<% content_for :page_title do %>
+<% 'Index' %>
+<% end %>
+
+<turbo-frame id="answer_index">
+  <div class="row row-cards">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Answers</h3>
+        </div>
+        <div class="table-responsive">
+          
+          <table class="table table-vcenter table-mobile-md card-table">
+            <thead>
+              
+                <th>Structure</th>
+              
+                <th>User</th>
+              
+              <th class="w-1"></th>
+            </thead>
+            <tbody>
+              <% @answers.each do |answer| %>
+              <tr id='<%= dom_id(answer)%>'>
+                
+                  <td class="text-muted" data-label="Structure">
+                    <%= answer.structure_id %>
+                  </td>
+                
+                  <td class="text-muted" data-label="User">
+                    <%= answer.user.email %>
+                  </td>
+                
+                <td>
+                  <div class="btn-list flex-nowrap">
+                    <%= button_to "Destroy", space_structure_answer_path(@space, @structure, answer), method: :delete, form: {data: {turbo_confirm: 'Are you sure?'}}, class: "btn btn-danger" %>
+                    <%= link_to "Show", space_structure_answer_path(@space, @structure, answer), data: { turbo_frame: '_top' }, class: "btn btn-primary" %>
+                  </div>
+                </td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer d-flex align-items-center">
+          <p class="m-0 text-muted"><%= page_entries_info @answers %></p>
+          <%= paginate @answers %>
+        </div>
+      </div>
+    </div>
+  </div>
+</turbo-frame>

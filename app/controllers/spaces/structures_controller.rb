@@ -7,6 +7,7 @@ class Spaces::StructuresController < ApplicationController
   end
 
   def show
+    @form_fields = @structure.form_fields
   end
 
   def new
