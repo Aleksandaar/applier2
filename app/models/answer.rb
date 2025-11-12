@@ -4,8 +4,10 @@ class Answer < ApplicationRecord
   belongs_to :structure
 
   store :form_data, coder: JSON
+  # has_one_attached :attachment
   
   validate :validate_form_data
+  validate :validate_attachment
   after_validation :create_or_find_user
   
   private
@@ -23,8 +25,32 @@ class Answer < ApplicationRecord
     # Validate required form fields
     structure.form_fields.where(required: true).each do |field|
       value = form_data&.dig(field.sanitized_label)
-      if value.blank?
+      if value.blank? && !field.file?
         errors.add(:form_data, "#{field.label} is required")
+      end
+    end
+  end
+
+  def validate_attachment
+    field = structure.form_fields.where(field_type: :file).first
+
+    if field.required && file_data.blank?
+      errors.add(:file_data, "#{field.label} is required")
+    end
+
+    if file_data.present?
+      self.filename = file_data.original_filename
+      self.content_type = file_data.content_type
+      self.file_data = file_data.read
+      # if attachment.byte_size > 5.megabytes
+      #   errors.add(:attachment, "is too large (maximum 5MB)")
+      # end
+
+      
+      # Allowed attachment types
+      allowed_types = ["application/pdf", "image/jpeg", "image/png", "application/msword"]
+      if !allowed_types.include?(self.content_type)
+        errors.add(:file_data, "#{field.label} must be PDF, JPG, PNG, or DOC")
       end
     end
   end

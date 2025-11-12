@@ -1,6 +1,6 @@
 class Spaces::Structures::AnswersController < ApplicationController
   before_action :set_space_and_structure
-  before_action :set_answer, only: %i[ show edit update destroy ]
+  before_action :set_answer, only: %i[ show edit update destroy download ]
 
   def index
     @answers = @structure.answers.page params[:page]
@@ -23,12 +23,15 @@ class Spaces::Structures::AnswersController < ApplicationController
       @answer = Answer.new
       flash.now[:notice] = "Thank you for the submission."
 
-      # respond_to do |format|
-      #   format.turbo_stream { flash.now[:notice] = "Thank you for the submission." }
-      #   format.html { redirect_to answer_path(@answer), notice: "Answer was successfully created.", status: :see_other }
-      # end
+      respond_to do |format|
+        format.turbo_stream { flash.now[:notice] = "Thank you for the submission." }
+        format.html { render :new }
+      end
     else
-      @answer = Answer.new
+      respond_to do |format|
+        format.turbo_stream { flash.now[:notice] = "There are issues with the form." }
+        format.html { render :new }
+      end
     end
   end
 
@@ -49,6 +52,10 @@ class Spaces::Structures::AnswersController < ApplicationController
     end
   end
 
+  def download
+    send_data(@answer.file_data, :type => @answer.content_type, :filename => "#{@answer.filename}", :disposition => "inline")
+  end
+
   private
     def set_space_and_structure
         @space = Space.find(params[:space_id])
@@ -60,6 +67,6 @@ class Spaces::Structures::AnswersController < ApplicationController
     end
 
     def answer_params
-      params.expect(answer: [ :structure_id, :status, :stared, form_data: {} ])
+      params.expect(answer: [ :structure_id, :status, :stared, :file_data, form_data: {} ])
     end
 end

@@ -17,13 +17,23 @@
           <%= form.label field.id, "#{field.label} #{'*' if field.required?}" , class: "form-label" %>
         <div class="col">
           <% if field.string? %>
-            <%= ff.text_field field.sanitized_label, value: answer.form_data[field.label], class:"form-control" %>
+            <%= ff.text_field field.sanitized_label, value: answer.form_data[field.label], id: "answer_#{field.id}", class:"form-control" %>
           <% end %>
           <% if field.text? %>
-            <%= ff.textarea field.sanitized_label, value: answer.form_data[field.label], class:"form-control" %>
+            <%= ff.textarea field.sanitized_label, value: answer.form_data[field.label], id: "answer_#{field.id}", class:"form-control" %>
           <% end %>
           <% if field.boolean? %>
-            <%= ff.check_box field.sanitized_label, {class:"form-check-input"}, true, false %>
+            <%= ff.check_box field.sanitized_label, {class:"form-check-input", id: "answer_#{field.id}"}, true, false %>
+          <% end %>
+          <% if field.file? %>
+            <%= form.file_field :file_data, id: "answer_#{field.id}" %>
+            <% if answer.errors[:file_data].any? && %>
+              <% error_text = answer.errors[:file_data].find { |word| word.include?(field.sanitized_label) } %>
+
+              <div class="invalid-feedback d-block">
+                This field <%= error_text.gsub(field.label, "") %>
+              </div>
+            <% end %>
           <% end %>
           <% if answer.errors[:form_data].any? && (error_text = answer.errors[:form_data].find { |word| word.include?(field.sanitized_label) }) %>
             <div class="invalid-feedback d-block">
@@ -33,8 +43,7 @@
         </div>
       </div>
     <% end %>
-   <% end %>
-  </div>
+  <% end %>
   
   <div class="form-footer">
     <%= form.submit "Submit", class:"btn btn-primary" %>

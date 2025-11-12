@@ -24,4 +24,13 @@
     <%= answer.stared %>
   </p>
 
+  <% if answer.file_data.present? %>
+    <div class="mb-3">
+      <p>
+        <strong>File:</strong>
+        <%= link_to answer.filename, download_space_structure_answer_path(answer.structure.space, answer.structure, answer) %>
+      </p>
+    </div>
+  <% end %>
+
 </div>

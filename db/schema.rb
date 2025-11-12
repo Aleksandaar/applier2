@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_11_144813) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_11_221017) do
   create_table "answers", force: :cascade do |t|
     t.integer "structure_id", null: false
     t.integer "user_id", null: false
@@ -19,6 +19,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_11_144813) do
     t.boolean "stared"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.binary "file_data"
+    t.string "filename"
+    t.string "content_type"
     t.index ["structure_id"], name: "index_answers_on_structure_id"
     t.index ["user_id"], name: "index_answers_on_user_id"
   end

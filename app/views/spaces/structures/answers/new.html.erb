@@ -15,6 +15,9 @@
             <p>
               <%= @structure.content %>
             </p>
+            <p>
+              <%= render 'common/flash' %>
+            </p>
             <%= render "form", answer: @answer %>
           </div>
         </div>

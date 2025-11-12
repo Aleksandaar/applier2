@@ -1,4 +1,4 @@
-<%= turbo_stream.update(@structure) do %>
+<%= turbo_stream.replace(@structure) do %>
   <%= render template: "spaces/structures/edit", structure: @structure %>
 <% end %>
 
