@@ -12,7 +12,7 @@ module ApplicationHelper
   end
 
   def nav_link(path, &)
-    options = current_page?(path) ? { class: "nav-item active" } : { class: "nav-item" }
+    options = current_page?(path) || (path.is_a?(String) && request.path.include?(path)) ? { class: "nav-item active" } : { class: "nav-item" }
     content_tag(:li, options) do
       link_to(path, class: "nav-link", &)
     end
