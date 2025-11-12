@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_11_221017) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_12_000657) do
   create_table "answers", force: :cascade do |t|
     t.integer "structure_id", null: false
     t.integer "user_id", null: false
@@ -81,7 +81,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_11_221017) do
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "token"
     t.index ["space_id"], name: "index_structures_on_space_id"
+    t.index ["token"], name: "index_structures_on_token", unique: true
   end
 
   create_table "subscriptions", force: :cascade do |t|

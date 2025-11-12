@@ -1,10 +1,2 @@
-<div class="card border">
-  <div class="card-body">
-    <div>
-      <%= render @structure %>
-    </div>
-    <div>
-      <%= link_to "Back to structures", space_structures_path(@space, @structure), class: "btn" %>
-    </div>
-  </div>
-</div>
+<%= render template: "spaces/structures/answers/new", answer: @answer %>
+

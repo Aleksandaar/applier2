@@ -1,13 +1,16 @@
 class Spaces::StructuresController < ApplicationController
-  before_action :set_space
-  before_action :set_structure, only: %i[ show edit update destroy ]
+  layout "plain", only: [:show]
+
+  before_action :set_space, unless: proc { params[:token].present? }
+  before_action :set_structure, only: %i[ show edit update destroy ], unless: proc { params[:token].present? }
+  before_action :set_space_and_structure, only: %i[ show ], if: proc { params[:token].present? }
 
   def index
     @structures = Structure.all.page params[:page]
   end
 
   def show
-    @form_fields = @structure.form_fields
+    @answer = Answer.new
   end
 
   def new
@@ -52,6 +55,11 @@ class Spaces::StructuresController < ApplicationController
 
     def set_structure
       @structure = @space.structures.find(params.expect(:id))
+    end
+
+    def set_space_and_structure
+      @structure = Structure.find_by(token: params[:token])
+      @space = @structure.space
     end
 
     def structure_params

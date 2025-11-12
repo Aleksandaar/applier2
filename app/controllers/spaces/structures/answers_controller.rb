@@ -21,15 +21,15 @@ class Spaces::Structures::AnswersController < ApplicationController
 
     if @answer.save
       @answer = Answer.new
-      flash.now[:notice] = "Thank you for the submission."
+      flash.now[:success] = "Thank you for the submission."
 
       respond_to do |format|
-        format.turbo_stream { flash.now[:notice] = "Thank you for the submission." }
+        format.turbo_stream { flash.now[:success] = "Thank you for the submission." }
         format.html { render :new }
       end
     else
       respond_to do |format|
-        format.turbo_stream { flash.now[:notice] = "There are issues with the form." }
+        format.turbo_stream { flash.now[:error] = "There are issues with the form." }
         format.html { render :new }
       end
     end

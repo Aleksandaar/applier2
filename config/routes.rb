@@ -12,6 +12,10 @@ Rails.application.routes.draw do
     resources :users, only: %i[index new create edit update destroy], controller: "spaces/users"
     resources :roles, controller: "spaces/roles"
     resources :structures, controller: "spaces/structures" do
+      member do
+        get :embeded
+      end
+      
       resources :form_fields, controller: "spaces/structures/form_fields"
       resources :answers, controller: "spaces/structures/answers" do
         member do
@@ -21,6 +25,9 @@ Rails.application.routes.draw do
     end
     resources :subscriptions, controller: "spaces/subscriptions"
   end
+
+  # Public token-based access
+  get "/form/:token", to: "spaces/structures#show"
 
   resource :setup, only: %i[edit update]
 

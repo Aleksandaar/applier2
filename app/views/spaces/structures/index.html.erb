@@ -61,7 +61,7 @@ Structures
                 <td>
                   <div class="btn-list flex-nowrap">
                     <%= button_to "Destroy", space_structure_path(@space, structure), method: :delete, form: {data: {turbo_confirm: 'Are you sure?'}}, class: "btn btn-danger" %>
-                    <%= link_to "Show", space_structure_path(@space, structure), data: { turbo_frame: '_top' }, class: "btn btn-primary" %>
+                    <%= link_to "Show", edit_space_structure_path(@space, structure), data: { turbo_frame: '_top' }, class: "btn btn-primary" %>
                     <%= link_to "Edit", edit_space_structure_path(@space, structure), data: { turbo_frame: '_top' }, class: "btn" %>
                   </div>
                 </td>
