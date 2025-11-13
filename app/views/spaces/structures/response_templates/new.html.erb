@@ -1,0 +1,31 @@
+<% content_for :page_pretitle do %>
+  Space structure response template / settings
+<% end %>
+<% content_for :page_title do %>
+  New
+<% end %>
+
+<div class="card border">
+  <div class="row g-0">
+    <div class="col-3 d-none d-md-block border-end">
+      <div class="card-body">
+        <h4 class="subheader">General</h4>
+        <div class="list-group list-group-transparent flex-column nav nav-response_template-settings" id="response_template-settings-tab" role="tablist" aria-orientation="vertical">
+          <button class="list-group-item list-group-item-action d-flex align-items-center nav-link active"
+					id="response_template-details-tab" data-bs-toggle="tab" data-bs-target="#response_template-details" type="button" role="tab" aria-controls="response_template-details" aria-selected="true">
+            Details
+            <small class="text-muted ms-auto">4</small>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col d-flex flex-column">
+      <div class="card-body tab-content" id="response_template-settings-tabContent">
+        <div class="tab-pane show active" id="response_template-details" role="tabpanel" aria-labelledby="response_template-details-tab" tabindex="0">
+          <h2 class="mb-4">Details</h2>
+          <%= render "form", response_template: @response_template %>
+         </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,5 @@
+<%= turbo_stream.update(@response_template) do %>
+  <%= render template: "spaces/structures/response_templates/edit", response_template: @response_template %>
+<% end %>
+
+<%= render_flash_stream %>

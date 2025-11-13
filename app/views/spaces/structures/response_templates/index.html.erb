@@ -1,0 +1,72 @@
+<% content_for :page_pretitle do %>
+Space structure response templates
+<% end %>
+<% content_for :page_title do %>
+<% 'Index' %>
+<% end %>
+
+<turbo-frame id="response_template_index">
+  <div class="row row-cards">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Space structure response templates</h3>
+          <div class="card-actions">
+            <%= link_to new_space_structure_response_template_path, data: { turbo_frame: '_top' }, class: "btn btn-primary" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+            New response template
+            <% end %>
+          </div>
+        </div>
+        <div class="table-responsive">
+          
+          <table class="table table-vcenter table-mobile-md card-table">
+            <thead>
+              
+                <th>Status</th>
+                <th>Subject</th>
+                <th>Enabled</th>
+
+              <th class="w-1"></th>
+            </thead>
+            <tbody>
+              <% @response_templates.each do |response_template| %>
+              <tr id='<%= dom_id(response_template)%>'>
+                
+                  <td class="text-muted" data-label="Label">
+                    <%= response_template.status %>
+                  </td>
+                
+                  <td class="text-muted" data-label="Position">
+                    <%= response_template.subject %>
+                  </td>
+
+                  <td class="text-muted" data-label="Field type">
+                    <%= response_template.enabled %>
+                  </td>
+                
+                <td>
+                  <div class="btn-list flex-nowrap">
+                    <%= button_to "Destroy", space_structure_response_template_path(@space, @structure, response_template), method: :delete, form: {data: {turbo_confirm: 'Are you sure?'}}, class: "btn btn-danger" %>
+                    <%= link_to "Show", space_structure_response_template_path(@space, @structure, response_template), data: { turbo_frame: '_top' }, class: "btn btn-primary" %>
+                    <%= link_to "Edit", edit_space_structure_response_template_path(@space, @structure, response_template), data: { turbo_frame: '_top' }, class: "btn" %>
+                  </div>
+                </td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer d-flex align-items-center">
+          <p class="m-0 text-muted"><%= page_entries_info @response_templates %></p>
+          <%= paginate @response_templates %>
+        </div>
+      </div>
+    </div>
+  </div>
+</turbo-frame>

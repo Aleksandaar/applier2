@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_12_000657) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_13_195336) do
   create_table "answers", force: :cascade do |t|
     t.integer "structure_id", null: false
     t.integer "user_id", null: false
@@ -54,6 +54,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_12_000657) do
     t.string "duration", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "response_templates", force: :cascade do |t|
+    t.integer "structure_id", null: false
+    t.integer "status"
+    t.string "subject"
+    t.text "content_html"
+    t.text "content_text"
+    t.boolean "enabled", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["structure_id"], name: "index_response_templates_on_structure_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -134,6 +146,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_12_000657) do
   add_foreign_key "answers", "structures"
   add_foreign_key "answers", "users"
   add_foreign_key "form_fields", "structures"
+  add_foreign_key "response_templates", "structures"
   add_foreign_key "roles", "spaces"
   add_foreign_key "structures", "spaces"
 end

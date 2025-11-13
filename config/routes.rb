@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       end
       
       resources :form_fields, controller: "spaces/structures/form_fields"
+      resources :response_templates, controller: "spaces/structures/response_templates"
       resources :answers, controller: "spaces/structures/answers" do
         member do
           get :download
