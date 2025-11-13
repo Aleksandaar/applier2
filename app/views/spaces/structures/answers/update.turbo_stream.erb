@@ -1,5 +1,11 @@
-<%= turbo_stream.replace(@answer) do %>
-  <%= render template: "spaces/structures/answers/edit", answer: @answer %>
+<% if @show_answer %>
+  <%= turbo_stream.replace(@answer) do %>
+    <%= render template: "spaces/structures/answers/_answer", locals: { answer: @answer } %>
+  <% end %>
+<% else %>
+  <%= turbo_stream.replace(@answer) do %>
+    <%= render template: "spaces/structures/answers/edit", locals: { answer: @answer } %>
+  <% end %>
 <% end %>
 
 <%= render_flash_stream %>

@@ -2,7 +2,7 @@ class ResponseTemplate < ApplicationRecord
   # Associations
   belongs_to :structure
 
-  # Status
+  # Status - must match statuses from the Answer model
   enum :status, [:accepted, :rejected, :archived, :spam, :process, :closed, :ignored]
 
   # Validations

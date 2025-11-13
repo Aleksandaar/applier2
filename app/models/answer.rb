@@ -5,10 +5,13 @@ class Answer < ApplicationRecord
 
   store :form_data, coder: JSON
   # has_one_attached :attachment
+
+  # Status
+  enum :status, [:accepted, :rejected, :archived, :spam, :process, :closed, :ignored]
   
-  validate :validate_form_data
-  validate :validate_attachment
-  after_validation :create_or_find_user
+  validate :validate_form_data, on: :create
+  validate :validate_attachment, on: :create
+  after_validation :create_or_find_user, on: :create
   
   private
   

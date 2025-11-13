@@ -37,6 +37,7 @@ class Spaces::Structures::AnswersController < ApplicationController
 
   def update
     if @answer.update(answer_params)
+      @show_answer = true if (answer_params.keys - ["status"]).blank?
       flash.now[:notice] = "Answer was successfully updated."
     else
       render :edit, status: :unprocessable_entity
@@ -48,7 +49,7 @@ class Spaces::Structures::AnswersController < ApplicationController
     
     respond_to do |format|
       format.turbo_stream { flash.now[:notice] = "Answer was successfully destroyed." }
-      format.html { redirect_to answers_path, notice: "Answer was successfully destroyed.", status: :see_other }
+      format.html { redirect_to space_structure_answer_path(@space, @structure, @answer), notice: "Answer was successfully destroyed.", status: :see_other }
     end
   end
 

@@ -32,7 +32,7 @@
           </div>
         <div class="tab-pane" id="answer-restricted" role="tabpanel" aria-labelledby="answer-restricted-tab" tabindex="0">
           <h2 class="mb-4">Restricted</h2>
-            <%= button_to "Destroy this answer", @answer, method: :delete, form: {data: {confirm: 'Are you sure?', turbo: false}}, class: "btn btn-danger" %>
+            <%= button_to "Destroy this answer", space_structure_answer_path(@space, @structure, @answer), method: :delete, form: {data: {confirm: 'Are you sure?', turbo: false}}, class: "btn btn-danger" %>
         </div>
       </div>
     </div>

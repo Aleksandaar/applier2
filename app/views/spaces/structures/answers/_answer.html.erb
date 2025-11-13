@@ -1,4 +1,4 @@
-<div id="<%= dom_id answer %>">
+<%= turbo_frame_tag(answer) do%>
   <p>
     <strong>Structure:</strong>
     <%= answer.structure_id %>
@@ -33,4 +33,16 @@
     </div>
   <% end %>
 
+
+
+    <div>
+    <%= button_to "Accept", 
+      space_structure_answer_path(@space, @structure, answer),
+      method: :patch,
+      params: { answer: { status: "accepted" } },
+      data: { turbo_confirm: "Mark as accepted?" },
+      class: "btn btn-animate-icon btn-animate-icon-tada btn-primary" %>
+    </div>
+
 </div>
+<% end %>
