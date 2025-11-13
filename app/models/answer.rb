@@ -12,6 +12,8 @@ class Answer < ApplicationRecord
   validate :validate_form_data, on: :create
   validate :validate_attachment, on: :create
   after_validation :create_or_find_user, on: :create
+
+  after_update :process_emails
   
   private
   
@@ -83,6 +85,16 @@ class Answer < ApplicationRecord
         errors.add(:base, "Could not create user: #{user.errors.full_messages.join(', ')}")
         throw :abort
       end
+    end
+  end
+
+  private
+
+  def process_emails
+    response_template = structure.response_templates.find_by(status: status, enabled: true)
+    
+    if response_template.present?
+      ResponseTemplateMailer.response_email(response_template, user).deliver_now!
     end
   end
 end
