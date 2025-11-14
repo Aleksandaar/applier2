@@ -9,3 +9,6 @@ pin "bootstrap", to: "bootstrap.bundle.min.js"
 pin "jsvectormap", to: "jsvectormap.min.js"
 pin "world", to: "maps/world.js"
 pin "tabler", to: "tabler.js"
+
+# Custom
+pin "helpers/auth", to: "helpers/auth.js"

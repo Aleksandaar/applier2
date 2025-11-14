@@ -1,0 +1,30 @@
+<%= form_with model: message.persisted? ? message : [message.structure.space, message.structure, message.answer, message], data: { controller: 'form', action: 'turbo:submit-end->form#resetForm' } do |f| %>
+  <% if message.persisted? %>
+    <div class='pt-2'>
+      <%= link_to 'Cancel', @message, class: 'btn btn-sm btn-outline-secondary' %>
+      <%= f.submit 'Save changes', class: 'btn btn-sm btn-primary'%>
+    <div>
+  <% end %>
+
+  <div class="input-group input-group-flat">
+    <%= f.text_field :content, class: 'form-control', required: true, autocomplete: 'off', autofocus: true, placeholder: "Type message" %>
+    <span class="input-group-text">
+      <a href="#" class="link-secondary" data-bs-toggle="tooltip" aria-label="Clear search" data-bs-original-title="Clear search">
+        <!-- Download SVG icon from http://tabler.io/icons/icon/mood-smile -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-1">
+          <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+          <path d="M9 10l.01 0"></path>
+          <path d="M15 10l.01 0"></path>
+          <path d="M9.5 15a3.5 3.5 0 0 0 5 0"></path>
+        </svg>
+      </a>
+      <a href="#" class="link-secondary ms-2" data-bs-toggle="tooltip" aria-label="Add notification" data-bs-original-title="Add notification">
+        <!-- Download SVG icon from http://tabler.io/icons/icon/paperclip -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-1">
+          <path d="M15 7l-6.5 6.5a1.5 1.5 0 0 0 3 3l6.5 -6.5a3 3 0 0 0 -6 -6l-6.5 6.5a4.5 4.5 0 0 0 9 9l6.5 -6.5"></path>
+        </svg>
+      </a>
+    </span>
+  </div>
+
+<% end %>

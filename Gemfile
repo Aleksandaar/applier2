@@ -57,6 +57,12 @@ gem "devise_invitable", "~> 2.0"
 
 gem "dotenv", "~> 3.1"
 
+gem 'local_time' # convert <time> tags to local time on client side
+gem 'commonmarker' # markdown support for html-pipeline
+gem 'gemoji' # emoji support for html-pipeline
+gem 'sanitize' # sanitization support for html-pipeline
+gem 'html-pipeline' # formatting html
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"

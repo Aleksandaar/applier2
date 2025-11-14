@@ -7,6 +7,11 @@ class Spaces::Structures::AnswersController < ApplicationController
   end
 
   def show
+    @messages = @answer.messages
+      .includes(:author)
+      .order(:created_at)
+
+    @new_message = Message.new(structure_id: @structure.id, answer_id: @answer.id)
   end
 
   def new

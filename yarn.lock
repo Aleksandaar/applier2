@@ -495,6 +495,11 @@ lilconfig@^3.1.1:
   resolved "https://registry.yarnpkg.com/lilconfig/-/lilconfig-3.1.3.tgz#a1bcfd6257f9585bf5ae14ceeebb7b559025e4c4"
   integrity sha512-/vlFKAoH5Cgt3Ie+JLhRbwOsCQePABiU3tJ1egGvyQ+33R/vcwM2Zl2QR/LzjsBeItPt3oSVXapn+m4nQDvpzw==
 
+local-time@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/local-time/-/local-time-2.1.0.tgz#be42f06bf269f9da77cb61ea722aa424dd01d919"
+  integrity sha512-4rB/8EkJIZ8O8Y5q536fSsRbzXOI0cL30l3ZKm4ISPC4D8jYOhRp/MpAaGKAYUvVIqkojT0c7kJk0RlnwtlR2w==
+
 merge2@^1.3.0:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/merge2/-/merge2-1.4.1.tgz#4368892f885e907455a6fd7dc55c0c9d404990ae"

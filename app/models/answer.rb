@@ -2,6 +2,7 @@ class Answer < ApplicationRecord
   # Associations
   belongs_to :user, optional: true
   belongs_to :structure
+  has_many :messages
 
   store :form_data, coder: JSON
   # has_one_attached :attachment

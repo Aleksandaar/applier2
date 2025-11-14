@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_13_195336) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_14_234341) do
   create_table "answers", force: :cascade do |t|
     t.integer "structure_id", null: false
     t.integer "user_id", null: false
@@ -43,6 +43,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_13_195336) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["structure_id"], name: "index_form_fields_on_structure_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer "author_id", null: false
+    t.integer "structure_id", null: false
+    t.integer "answer_id", null: false
+    t.text "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["answer_id"], name: "index_messages_on_answer_id"
+    t.index ["author_id"], name: "index_messages_on_author_id"
+    t.index ["structure_id", "answer_id", "created_at"], name: "index_messages_on_structure_id_and_answer_id_and_created_at"
+    t.index ["structure_id"], name: "index_messages_on_structure_id"
   end
 
   create_table "plans", force: :cascade do |t|
@@ -146,6 +159,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_13_195336) do
   add_foreign_key "answers", "structures"
   add_foreign_key "answers", "users"
   add_foreign_key "form_fields", "structures"
+  add_foreign_key "messages", "answers"
+  add_foreign_key "messages", "structures"
+  add_foreign_key "messages", "users", column: "author_id"
   add_foreign_key "response_templates", "structures"
   add_foreign_key "roles", "spaces"
   add_foreign_key "structures", "spaces"

@@ -1,10 +1,64 @@
 <div class="card border">
-  <div class="card-body">
     <div>
-      <%= render @answer %>
+      <%#= link_to "Back to answers", space_structure_answers_path(@space, @structure), class: "btn" %>
     </div>
-    <div>
-      <%= link_to "Back to answers", space_structure_answers_path(@space, @structure), class: "btn" %>
+
+  <div class="card-body">
+    <div class="accordion" id="accordion-default">
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <button class="accordion-button <%= "#{'collapsed' if @messages.present?}"%>" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-1-default" aria-expanded="false">
+            Info
+            <div class="accordion-button-toggle">
+              <!-- Download SVG icon from http://tabler.io/icons/icon/chevron-down -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-1">
+                <path d="M6 9l6 6l6 -6"></path>
+              </svg>
+            </div>
+          </button>
+        </div>
+        <div id="collapse-1-default" class="accordion-collapse collapse <%= "#{'show' if !@messages.present?}"%>" data-bs-parent="#accordion-default" style="">
+          <div class="accordion-body">
+            <%= render @answer %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+<div class="card border">
+    <%= turbo_stream_from @answer %>
+
+    <div class="">
+      <div class="card flex-fill">
+        <div class="row g-0 flex-fill">
+          <div class="card-header">
+            <h3 class="card-title">Messages</h3>
+          </div>
+          
+          <div class="col-12 col-lg-12 col-xl-12 d-flex flex-column list-group list-group-flush overflow-auto" style="max-height: 35rem">
+            <div class="card-body scrollable">
+              <div class="chat">
+                  
+                <div class='chat-bubbles message-list' id='messages'
+                    data-controller='message-list' data-action='resize@window->message-list#scrollToBottom'>
+                  <%= render partial: 'messages/message', collection: @messages, cached: true %>
+                </div>
+                  
+                  
+              </div>
+            </div>
+            <div class="card-footer">
+              <%= turbo_frame_tag @new_message, class: 'flex-shrink-0 px-3 pb-3 pt-2' do %>
+                <%= render 'messages/form', message: @new_message %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

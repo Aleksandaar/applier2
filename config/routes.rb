@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       resources :form_fields, controller: "spaces/structures/form_fields"
       resources :response_templates, controller: "spaces/structures/response_templates"
       resources :answers, controller: "spaces/structures/answers" do
+        resources :messages, shallow: true, only: %i[ create edit update destroy show ]
         member do
           get :download
         end
