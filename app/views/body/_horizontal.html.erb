@@ -10,34 +10,38 @@
         </a>
       </h1>
       <div class="navbar-nav flex-row order-md-last">
-        <%= render 'common/profile_dropdown' %>
+      <%= render 'common/profile_dropdown' %>
       </div>
     </div>
   </header>
   <div class="wrapper flex-grow-1">
     <div class="navbar-expand-md">
-      <div class="collapse navbar-collapse" id="navbar-menu">
-        <div class="navbar navbar-light">
-          <div class="container-xl">
-            <%= render 'common/nav_items' %>
-            <div class="my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
-              <%= render 'common/space_selector' %>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <% if @structure.present? && @structure.persisted? %>
+      <% if current_user.admin? %>
         <div class="collapse navbar-collapse" id="navbar-menu">
           <div class="navbar navbar-light">
             <div class="container-xl">
-              <%= render 'common/nav_items_structure' %>
+              <%= render 'common/nav_items' %>
               <div class="my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
-              <%= render 'common/structure_selector' %>
-            </div>
+                <%= render 'common/space_selector' %>
+              </div>
             </div>
           </div>
         </div>
+      <% end %>
+
+      <% if @structure.present? && @structure.persisted? %>
+        <% if policy(@structure).show? %>
+          <div class="collapse navbar-collapse" id="navbar-menu">
+            <div class="navbar navbar-light">
+              <div class="container-xl">
+                <%= render 'common/nav_items_structure' %>
+                <div class="my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
+                <%= render 'common/structure_selector' %>
+              </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
       <% end %>
 
     </div>

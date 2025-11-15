@@ -6,7 +6,7 @@ class Spaces::StructuresController < ApplicationController
   before_action :set_space_and_structure, only: %i[ show ], if: proc { params[:token].present? }
 
   def index
-    @structures = Structure.all.page params[:page]
+    @structures = @space.structures.page params[:page]
   end
 
   def show

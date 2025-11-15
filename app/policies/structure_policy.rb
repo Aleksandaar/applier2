@@ -1,7 +1,7 @@
-class SpacePolicy < ApplicationPolicy
+class StructurePolicy < ApplicationPolicy
   def initialize(user, record)
     super
-    @role = user.get_role_in_space(record)
+    @role = user.get_role_in_space(record.space)
   end
 
   def update?
@@ -13,6 +13,6 @@ class SpacePolicy < ApplicationPolicy
   end
 
   def show?
-    user.admin?
+    @role&.can_update_space?
   end
 end

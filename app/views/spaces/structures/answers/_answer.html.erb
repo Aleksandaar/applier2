@@ -35,13 +35,16 @@
 
 
 
-    <div>
-    <%= button_to "Accept", 
-      space_structure_answer_path(@space, @structure, answer),
-      method: :patch,
-      params: { answer: { status: "accepted" } },
-      data: { turbo_confirm: "Mark as accepted?" },
-      class: "btn btn-animate-icon btn-animate-icon-tada btn-primary" %>
-    </div>
+
+  <% if policy(@space).update? %>
+      <div>
+      <%= button_to "Accept", 
+        space_structure_answer_path(@space, @structure, answer),
+        method: :patch,
+        params: { answer: { status: "accepted" } },
+        data: { turbo_confirm: "Mark as accepted?" },
+        class: "btn btn-animate-icon btn-animate-icon-tada btn-primary" %>
+      </div>
+    <% end %>
 
 <% end %>

@@ -12,9 +12,21 @@ class Answer < ApplicationRecord
   
   validate :validate_form_data, on: :create
   validate :validate_attachment, on: :create
+  validates :token, presence: true, uniqueness: true
   after_validation :create_or_find_user, on: :create
+  
+  before_create :generate_token
+  after_update :process_emails, if: :saved_change_to_status?
 
-  after_update :process_emails
+  def send_notification(message)
+    if !message.author.admin?  # message.author.simple?
+      user = structure.space.users.find_by(admin: true)
+
+      MessageMailer.new_message_admin_notification(self, user).deliver_now!
+    else
+      MessageMailer.new_message_notification(self, message.answer.user).deliver_now!
+    end
+  end
   
   private
   
@@ -89,13 +101,15 @@ class Answer < ApplicationRecord
     end
   end
 
-  private
-
   def process_emails
     response_template = structure.response_templates.find_by(status: status, enabled: true)
     
     if response_template.present?
       ResponseTemplateMailer.response_email(response_template, user).deliver_now!
     end
+  end
+
+  def generate_token
+    self.token = SecureRandom.hex(8)
   end
 end

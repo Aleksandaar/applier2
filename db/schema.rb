@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_14_234341) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_14_234343) do
   create_table "answers", force: :cascade do |t|
     t.integer "structure_id", null: false
     t.integer "user_id", null: false
@@ -22,7 +22,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_14_234341) do
     t.binary "file_data"
     t.string "filename"
     t.string "content_type"
+    t.string "token"
     t.index ["structure_id"], name: "index_answers_on_structure_id"
+    t.index ["token"], name: "index_answers_on_token", unique: true
     t.index ["user_id"], name: "index_answers_on_user_id"
   end
 
@@ -151,6 +153,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_14_234341) do
     t.integer "invitation_limit"
     t.integer "invited_by_id"
     t.string "invited_by_type"
+    t.integer "user_type", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

@@ -1,6 +1,7 @@
 class Spaces::Structures::AnswersController < ApplicationController
-  before_action :set_space_and_structure
   before_action :set_answer, only: %i[ show edit update destroy download ]
+  before_action :set_space_and_structure
+  before_action :ensure_user_logged_in, only: [:show]
 
   def index
     @answers = @structure.answers.page params[:page]
@@ -63,13 +64,24 @@ class Spaces::Structures::AnswersController < ApplicationController
   end
 
   private
+    def ensure_user_logged_in
+      if !user_signed_in? && @answer.user.present?
+        sign_in(@answer.user)
+      end
+    end
+
     def set_space_and_structure
+      if @answer.present?
+        @structure = @answer.structure
+        @space = @structure.space
+      else
         @space = Space.find(params[:space_id])
         @structure = @space.structures.find(params.expect(:structure_id))
+      end
     end
 
     def set_answer
-      @answer = Answer.find(params.expect(:id))
+      @answer = Answer.find_by(id: params[:id]) || Answer.find_by(token: params[:token])
     end
 
     def answer_params

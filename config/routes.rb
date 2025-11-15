@@ -30,6 +30,7 @@ Rails.application.routes.draw do
 
   # Public token-based access
   get "/form/:token", to: "spaces/structures#show"
+  get "/place/:token", to: "spaces/structures/answers#show", as: :place
 
   resource :setup, only: %i[edit update]
 

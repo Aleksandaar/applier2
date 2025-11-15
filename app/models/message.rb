@@ -7,7 +7,15 @@ class Message < ApplicationRecord
 
   validates :author, :answer, :structure, :content, presence: true
 
+  after_create :send_notification
+
   def edited?
     created_at != updated_at
+  end
+
+  private
+
+  def send_notification
+    answer.send_notification(self)
   end
 end
