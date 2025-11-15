@@ -147,6 +147,7 @@ GEM
     gemoji (4.1.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    hashr (2.0.1)
     html-pipeline (3.2.3)
       selma (~> 0.4)
       zeitwerk (~> 2.5)
@@ -477,6 +478,7 @@ DEPENDENCIES
   dotenv (~> 3.1)
   factory_bot_rails
   gemoji
+  hashr
   html-pipeline
   importmap-rails
   jbuilder
