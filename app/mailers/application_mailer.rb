@@ -1,8 +1,8 @@
 class ApplicationMailer < ActionMailer::Base
   include Rails.application.routes.url_helpers
   
-  default from: "from@example.com"
+  default from: App::Config.mailer.default_from
   layout "mailer"
 
-  default_url_options = { host: ENV["MAIL_HOST"] || "localhost:3000" }
+  default_url_options = { host: App::Config.mailer.default_site_host }
 end
