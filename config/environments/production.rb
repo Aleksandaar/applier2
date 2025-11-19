@@ -63,11 +63,11 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   
   config.action_mailer.smtp_settings = {
-    address: Site::Configuration.mailer.host,
-    port: Site::Configuration.mailer.port,
-    domain: Site::Configuration.mailer.domain,
-    user_name: Site::Configuration.mailer.user_name,
-    password: Site::Configuration.mailer.password,
+    address: Rails.application.config_for(:configuration).mailer[:host],
+    port: Rails.application.config_for(:configuration).mailer[:port],
+    domain: Rails.application.config_for(:configuration).mailer[:domain],
+    user_name: Rails.application.config_for(:configuration).mailer[:user_name],
+    password: Rails.application.config_for(:configuration).mailer[:password],
     authentication: "plain",
     enable_starttls_auto: true
   }
