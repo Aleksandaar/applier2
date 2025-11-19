@@ -60,17 +60,18 @@ Rails.application.configure do
   # Set host to be used by links generated in mailer templates.
   config.action_mailer.default_url_options = { host: Rails.application.config_for(:configuration).mailer[:default_site_host] }
   config.action_mailer.postmark_settings = { api_token: Rails.application.config_for(:configuration).mailer[:postmark_api_key] }
-  config.action_mailer.delivery_method = :postmark
-
-  # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
+  config.action_mailer.delivery_method = :smtp
+  
   config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
-    port: 587,
-    user_name: ENV["GMAIL_USER_NAME"],
-    password: ENV["GMAIL_PASSWORD"],
+    address: Site::Configuration.mailer.host,
+    port: Site::Configuration.mailer.port,
+    domain: Site::Configuration.mailer.domain,
+    user_name: Site::Configuration.mailer.user_name,
+    password: Site::Configuration.mailer.password,
     authentication: "plain",
     enable_starttls_auto: true
   }
+
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
