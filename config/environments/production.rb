@@ -59,7 +59,7 @@ Rails.application.configure do
 
   # Set host to be used by links generated in mailer templates.
   config.action_mailer.default_url_options = { host: Rails.application.config_for(:configuration).mailer[:default_site_host] }
-  config.action_mailer.postmark_settings = { api_token: Rails.application.config_for(:configuration).mailer[:postmark_api_key] }
+  # config.action_mailer.postmark_settings = { api_token: Rails.application.config_for(:configuration).mailer[:postmark_api_key] }
   config.action_mailer.delivery_method = :smtp
   
   config.action_mailer.smtp_settings = {
