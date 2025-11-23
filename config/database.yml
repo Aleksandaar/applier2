@@ -27,7 +27,8 @@ production:
   primary:
     <<: *default
     adapter: postgresql
-    encoding: unicode
+    encoding: utf8
+    host: "localhost"
     database: afformative_production
     username: <%= ENV["DATABASE_USERNAME"] %>
     password: <%= ENV["DATABASE_PASSWORD"] %>
