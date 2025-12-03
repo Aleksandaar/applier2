@@ -3,6 +3,8 @@ class Spaces::Structures::AnswersController < ApplicationController
   before_action :set_space_and_structure
   before_action :ensure_user_logged_in, only: [:show]
 
+  before_action :allow_iframe_headers, only: [:new, :create]
+
   def index
     @answers = @structure.answers.page params[:page]
   end
@@ -64,6 +66,10 @@ class Spaces::Structures::AnswersController < ApplicationController
   end
 
   private
+    def allow_iframe_headers
+      headers['X-Frame-Options'] = 'ALLOWALL'
+    end
+
     def ensure_user_logged_in
       if !user_signed_in? && @answer.user.present?
         sign_in(@answer.user)
