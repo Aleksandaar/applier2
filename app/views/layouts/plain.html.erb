@@ -19,6 +19,14 @@
 
     <%= javascript_importmap_tags %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
+    <style>
+      body {
+        background-color: transparent !important;
+        margin: 0 !important;
+      }
+    </style>
+
   </head>
   <%= yield %>
 </html>
