@@ -1,5 +1,6 @@
 class Spaces::Structures::AnswersController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:create]
+  skip_before_action :authenticate_user!, only: [:new, :create]
 
   before_action :set_answer, only: %i[ show edit update destroy download ]
   before_action :set_space_and_structure
