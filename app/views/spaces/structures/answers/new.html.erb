@@ -13,7 +13,7 @@
           <div class="tab-pane show active" id="answer-details" role="tabpanel" aria-labelledby="answer-details-tab" tabindex="0">
             <h2 class="mb-4"><%= @structure.name %></h2>
             <p>
-              <%= @structure.content.html_safe %>
+              <%= simple_format(@structure.content) %>
             </p>
             <p>
               <%= render 'common/flash' %>
