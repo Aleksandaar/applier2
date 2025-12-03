@@ -13,9 +13,9 @@ class Answer < ApplicationRecord
   validate :validate_form_data, on: :create
   validate :validate_attachment, on: :create
   validates :token, presence: true, uniqueness: true
+
+  before_validation :ensure_token
   after_validation :create_or_find_user, on: :create
-  
-  before_create :generate_token
   after_update :process_emails, if: :saved_change_to_status?
 
   def send_notification(message)
@@ -109,7 +109,9 @@ class Answer < ApplicationRecord
     end
   end
 
-  def generate_token
-    self.token = SecureRandom.hex(8)
+  def ensure_token
+    if token.blank?
+      self.token = SecureRandom.hex(8)
+    end
   end
 end
