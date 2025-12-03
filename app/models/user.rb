@@ -44,7 +44,7 @@ class User < ApplicationRecord
          :invitable
 
   enum :status, active: 0, archived: 1
-  enum :user_type, [:simple]
+  enum :user_type, [:simple, :regular]
 
   alias_attribute :admin?, :admin
 

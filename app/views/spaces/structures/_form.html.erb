@@ -16,7 +16,7 @@
     <div class="form-group mb-3 row">
       <%= form.label :status, class: "form-label col-3 col-form-label" %>
     <div class="col">
-      <%= form.number_field :status, class:"form-control" %>
+      <%= form.select :status, Structure.statuses.keys, {}, { class:"form-select" } %>
     </div>
   
   </div>
