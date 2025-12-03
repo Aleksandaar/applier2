@@ -3,8 +3,6 @@ class Spaces::Structures::AnswersController < ApplicationController
   before_action :set_space_and_structure
   before_action :ensure_user_logged_in, only: [:show]
 
-  before_action :allow_iframe_headers, only: [:new]
-
   def index
     @answers = @structure.answers.page params[:page]
   end
@@ -80,10 +78,6 @@ class Spaces::Structures::AnswersController < ApplicationController
         @space = Space.find(params[:space_id])
         @structure = @space.structures.find(params.expect(:structure_id))
       end
-    end
-
-    def allow_iframe_headers
-      headers['X-Frame-Options'] = 'ALLOWALL'
     end
 
     def set_answer

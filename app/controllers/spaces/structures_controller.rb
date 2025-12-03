@@ -5,6 +5,8 @@ class Spaces::StructuresController < ApplicationController
   before_action :set_structure, only: %i[ show edit update destroy ], unless: proc { params[:token].present? }
   before_action :set_space_and_structure, only: %i[ show ], if: proc { params[:token].present? }
 
+  before_action :allow_iframe_headers, only: [:show]
+
   def index
     @structures = @space.structures.page params[:page]
   end
@@ -49,6 +51,10 @@ class Spaces::StructuresController < ApplicationController
   end
 
   private
+    def allow_iframe_headers
+      headers['X-Frame-Options'] = 'ALLOWALL'
+    end
+
     def set_space
       @space = Space.find(params[:space_id])
     end
