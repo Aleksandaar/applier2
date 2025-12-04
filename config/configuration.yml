@@ -3,7 +3,7 @@ default: &default
     demo_mode: <%= ENV.fetch("DEMO_MODE") { true } %>
   mailer:
     postmark_api_key: <%= ENV.fetch("POSTMARK_API_TOKEN") { '' } %>
-    default_site_host: <%= ENV.fetch("DEFAULT_SITE_HOST_ADDRESS") { '' } %>
+    default_site_host: <%= ENV.fetch("APP_DOMAIN_NAME") { '' } %>
     default_from: <%= ENV.fetch("DEFAULT_FROM_EMAIL") { 'from@example.com' } %>
     no_replay_email: <%= "#{ENV['MAIL_NAME_FROM']} <no-replay@#{ENV["APP_DOMAIN_NAME"]}>" %>
     host: <%= ENV["MAIL_HOST"] %>
