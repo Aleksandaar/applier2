@@ -17,15 +17,10 @@ class Answer < ApplicationRecord
   before_validation :ensure_token
   after_validation :create_or_find_user, on: :create
   after_update :process_emails, if: :saved_change_to_status?
+  after_create :send_notification
 
-  def send_notification(message)
-    if !message.author.admin?  # message.author.simple?
-      user = structure.space.users.find_by(admin: true)
-
-      MessageMailer.new_message_admin_notification(self, user).deliver_now!
-    else
-      MessageMailer.new_message_notification(self, message.answer.user).deliver_now!
-    end
+  def send_notification
+    NewSubmissionMailer.new_submission(self.structure, self.structure.space).deliver_now!
   end
   
   private

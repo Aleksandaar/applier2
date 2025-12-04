@@ -9,7 +9,7 @@ class Spaces::Structures::AnswersController < ApplicationController
   before_action :allow_iframe_headers, only: [:new, :create]
 
   def index
-    @answers = @structure.answers.page params[:page]
+    @answers = @structure.answers.order(created_at: :desc).page params[:page]
   end
 
   def show
