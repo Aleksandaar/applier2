@@ -5,7 +5,7 @@
   New
 <% end %>
 
-<div data-controller="iframe-code" data-iframe-code-link-value="<%= embeded_form_url(@structure.token) %>">
+<div data-controller="iframe-code" data-iframe-code-link-value="<%= embeded_form_url(@structure.token) %>" data-iframe-code-field-count-value="<%= @structure.form_fields.required.count %>">
   <div class="card border mb-3">
     <div class="row g-0">
       <div class="col d-flex flex-column">

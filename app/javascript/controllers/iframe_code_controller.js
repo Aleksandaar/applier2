@@ -4,13 +4,12 @@ export default class extends Controller {
   static targets = ["formHeight", "inputLink"]
   static values = { 
     link: String,
-    formId: String
+    fieldCount: Number
   }
   
   connect() {
     this.updateIframeCode()
     
-    // Update if content height changes
     this.observer = new ResizeObserver(() => this.updateIframeCode())
     this.observer.observe(this.formHeightTarget)
   }
@@ -22,7 +21,7 @@ export default class extends Controller {
   }
   
   updateIframeCode() {
-    const height = this.formHeightTarget.offsetHeight + 100;
+    const height = this.formHeightTarget.offsetHeight + (this.fieldCountValue + 1) * 21 + 49;
     const iframeCode = `<iframe style="border: none; width: 100%; overflow: hidden; height: ${height}px;" src="${this.linkValue}" scrolling="no"></iframe>`
     this.inputLinkTarget.value = iframeCode
   }
