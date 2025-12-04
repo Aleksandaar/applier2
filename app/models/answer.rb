@@ -22,6 +22,16 @@ class Answer < ApplicationRecord
   def send_notification
     NewSubmissionMailer.new_submission(self.structure, self.structure.space).deliver_now!
   end
+
+  def send_message(message)
+    if !message.author.admin?  # message.author.simple?
+      user = structure.space.users.find_by(admin: true)
+
+      MessageMailer.new_message_admin_notification(self, user).deliver_now!
+    else
+      MessageMailer.new_message_notification(self, message.answer.user).deliver_now!
+    end
+  end
   
   private
   

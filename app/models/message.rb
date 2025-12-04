@@ -16,6 +16,6 @@ class Message < ApplicationRecord
   private
 
   def send_notification
-    answer.send_notification(self)
+    answer.send_message(self)
   end
 end
