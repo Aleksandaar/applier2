@@ -65,7 +65,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address: Rails.application.config_for(:configuration).mailer[:host],
     port: Rails.application.config_for(:configuration).mailer[:port],
-    domain: Rails.application.config_for(:configuration).mailer[:domain],
+    domain: Rails.application.config_for(:configuration).mailer[:host],
     user_name: Rails.application.config_for(:configuration).mailer[:user_name],
     password: Rails.application.config_for(:configuration).mailer[:password],
     authentication: "plain",
