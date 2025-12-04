@@ -20,8 +20,13 @@ Rails.application.routes.draw do
       resources :response_templates, controller: "spaces/structures/response_templates"
       resources :answers, controller: "spaces/structures/answers" do
         resources :messages, shallow: true, only: %i[ create edit update destroy show ]
+        
         member do
           get :download
+        end
+
+        collection do
+          get :preview
         end
       end
     end
@@ -29,7 +34,7 @@ Rails.application.routes.draw do
   end
 
   # Public token-based access
-  get "/form/:token", to: "spaces/structures#show"
+  get "/form/:token", to: "spaces/structures#show", as: :embeded_form
   get "/place/:token", to: "spaces/structures/answers#show", as: :place
 
   resource :setup, only: %i[edit update]

@@ -1,0 +1,36 @@
+<% content_for :page_pretitle do %>
+  Answer / settings
+<% end %>
+<% content_for :page_title do %>
+  New
+<% end %>
+
+<div data-controller="iframe-code" data-iframe-code-link-value="<%= embeded_form_url(@structure.token) %>">
+  <div class="card border mb-3">
+    <div class="row g-0">
+      <div class="col d-flex flex-column">
+        <div class="card-body tab-content" id="answer-settings-tabContent">
+
+          <div class="mb-3">
+            <label class="form-label">IFrame Link</label>
+            <div class="input-group mb-2">
+              <input type="text" 
+                    class="form-control" 
+                    placeholder="IFrame Link"
+                    data-iframe-code-target="inputLink"
+                    readonly>
+              <button class="btn btn-primary" 
+                      type="button"
+                      data-action="click->iframe-code#copy">
+                Copy!
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%= render template: "spaces/structures/answers/new", answer: @answer %>
+</div>

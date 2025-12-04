@@ -24,6 +24,10 @@ class Spaces::Structures::AnswersController < ApplicationController
     @answer = Answer.new
   end
 
+  def preview
+    @answer = Answer.new
+  end
+
   def edit
   end
 
