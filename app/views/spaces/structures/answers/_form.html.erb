@@ -20,7 +20,7 @@
             <%= ff.text_field field.sanitized_label, value: answer.form_data[field.label], id: "answer_#{field.id}", class:"form-control" %>
           <% end %>
           <% if field.text? %>
-            <%= ff.textarea field.sanitized_label, value: answer.form_data[field.label], id: "answer_#{field.id}", class:"form-control" %>
+            <%= ff.textarea field.sanitized_label, value: answer.form_data[field.label], id: "answer_#{field.id}", rows: 3, class:"form-control" %>
           <% end %>
           <% if field.boolean? %>
             <%= ff.check_box field.sanitized_label, {class:"form-check-input", id: "answer_#{field.id}"}, true, false %>
