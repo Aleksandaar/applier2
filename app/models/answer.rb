@@ -56,24 +56,26 @@ class Answer < ApplicationRecord
 
   def validate_attachment
     field = structure.form_fields.where(field_type: :file).first
+    
+    if field.present?
+      if field.required && file_data.blank?
+        errors.add(:file_data, "#{field.label} is required")
+      end
 
-    if field.required && file_data.blank?
-      errors.add(:file_data, "#{field.label} is required")
-    end
+      if file_data.present?
+        self.filename = file_data.original_filename
+        self.content_type = file_data.content_type
+        self.file_data = file_data.read
+        # if attachment.byte_size > 5.megabytes
+        #   errors.add(:attachment, "is too large (maximum 5MB)")
+        # end
 
-    if file_data.present?
-      self.filename = file_data.original_filename
-      self.content_type = file_data.content_type
-      self.file_data = file_data.read
-      # if attachment.byte_size > 5.megabytes
-      #   errors.add(:attachment, "is too large (maximum 5MB)")
-      # end
-
-      
-      # Allowed attachment types
-      allowed_types = ["application/pdf", "image/jpeg", "image/png", "application/msword"]
-      if !allowed_types.include?(self.content_type)
-        errors.add(:file_data, "#{field.label} must be PDF, JPG, PNG, or DOC")
+        
+        # Allowed attachment types
+        allowed_types = ["application/pdf", "image/jpeg", "image/png", "application/msword"]
+        if !allowed_types.include?(self.content_type)
+          errors.add(:file_data, "#{field.label} must be PDF, JPG, PNG, or DOC")
+        end
       end
     end
   end
