@@ -21,7 +21,9 @@ export default class extends Controller {
   }
   
   updateIframeCode() {
-    const height = this.formHeightTarget.offsetHeight + (this.fieldCountValue + 1) * 22 + 62;
+    // const height = this.formHeightTarget.offsetHeight + (this.fieldCountValue + 1) * 22 + 62; // with notification
+    const height = this.formHeightTarget.offsetHeight + (this.fieldCountValue + 1) * 22;
+
     const iframeCode = `<iframe style="border: none; width: 100%; overflow: hidden; height: ${height}px;" src="${this.linkValue}" scrolling="no"></iframe>`
     this.inputLinkTarget.value = iframeCode
   }

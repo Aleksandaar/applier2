@@ -15,9 +15,6 @@
             <p>
               <%= raw(@structure.content).html_safe %>
             </p>
-            <p>
-              <%= render 'common/flash' %>
-            </p>
             <%= render "spaces/structures/answers/form", answer: @answer %>
           </div>
         </div>
