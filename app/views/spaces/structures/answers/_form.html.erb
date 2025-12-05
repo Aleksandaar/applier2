@@ -5,7 +5,7 @@
       <div class="col">
         <%= ff.text_field :email, value: answer.form_data["email"], class:"form-control" %>
         <% if answer.errors[:form_data].any? && (error_text = answer.errors[:form_data].find { |word| word.include?("email is") }) %>
-          <div class="invalid-feedback d-block">
+          <div class="invalid-feedback d-block position-absolute mt-0">
             <%= error_text %>
           </div>
         <% end %>
@@ -30,13 +30,13 @@
             <% if answer.errors[:file_data].any? && %>
               <% error_text = answer.errors[:file_data].find { |word| word.include?(field.sanitized_label) } %>
 
-              <div class="invalid-feedback d-block">
+              <div class="invalid-feedback d-block position-absolute mt-0">
                 This field <%= error_text.gsub(field.label, "") %>
               </div>
             <% end %>
           <% end %>
           <% if answer.errors[:form_data].any? && (error_text = answer.errors[:form_data].find { |word| word.include?(field.sanitized_label) }) %>
-            <div class="invalid-feedback d-block">
+            <div class="invalid-feedback d-block position-absolute mt-0">
               This field <%= error_text.gsub(field.label, "") %>
             </div>
           <% end %>
