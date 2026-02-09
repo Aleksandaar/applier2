@@ -1,4 +1,4 @@
-<body data-bs-theme="<%= interface_mode %>">
+<body>
   <div class="page">
     <aside class="navbar navbar-vertical navbar-expand-lg navbar-transparent">
       <div class="container-fluid">
@@ -7,7 +7,7 @@
         </button>
         <h1 class="navbar-brand navbar-brand-autodark">
           <a href="/">
-            <%= image_tag "logo.svg", width: "110", height: "32", alt: "Portal", class: "navbar-brand-image" %>
+            <%= inline_svg "logo.svg", width: "110", height: "32", alt: "Portal", class: "navbar-brand-image" %>
           </a>
         </h1>
         <div class="navbar-nav flex-row d-lg-none">
@@ -35,12 +35,7 @@
             </div>
           </div>
         </div>
-        <% if notice %>
-          <p class="alert alert-success alert-dismissible"><%= notice %></p>
-        <% end %>
-        <% if alert %>
-          <p class="alert alert-danger alert-dismissible"><%= alert %></p>
-        <% end %>
+        <%= render 'common/flash' %>
       </div>
       <div class="page-body">
         <div class="container-xl">

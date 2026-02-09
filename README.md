@@ -1,142 +1,92 @@
-<div align="center">
-  <br>
-  <h1>Rails Tabler Starter</h1>
-  <strong>Rails starter boilerplate that you can use to build and prototype quickly. Get from idea to implementation in hours.</strong>
-  <br>
-  <br>
+# Rails Tabler Starter
 
-  ![](./app/assets/images/saas-example.gif)
-</div>
+**Skip the first 40 hours of setup. Build your product instead.**
 
-[Click here](https://rails-tabler.tarunvelli.site) to view demo application. Check out the [Demo setup page](https://rails-tabler.tarunvelli.site/setup/edit) to toggle application settings.
-
-## Goals
-
-This starter is aimed at Rails developers familiar with the framework, aiming to facilitate seamless development with the following principles:
-
-* No DSL: Avoid unnecessary Domain Specific Language (DSL) complexity.
-* Simplicity over Efficiency: Prioritize simplicity in implementation over excessive optimization.
-* Avoid Complex Frontend Functionality: Keep frontend functionality straightforward and manageable.
-
-## Overview
-
-* Pre-equipped with essential models such as
-
-    * Users
-    * Roles
-    * Plans
-    * Subscriptions
+`rails-tabler-starter` is a production-ready boilerplate for developers who want a high-quality UI without the frontend fatigue. It uses a modern **Rails 8** stack (Solid Queue, Solid Cache) and **Tabler (Bootstrap 5)** for a clean, professional dashboard out of the box.
 
 <div align="center">
-  <strong>ERD</strong>
+<img src="./app/assets/images/saas-example.gif" alt="Rails Tabler Preview" width="800px" style="border-radius: 8px;" />
 
-  ![](./app/assets/images/template-erb.png)
+**[Explore the Demo](https://rails-tabler.tarunvelli.site)**
+
 </div>
 
-* User authentication & authorization
+## The Goal
 
-    * Authentication via [Devise](https://github.com/heartcombo/devise)
-    * [OmniAuth](https://github.com/heartcombo/devise/wiki/OmniAuth%3A-Overview) integration to extend authentication using third-party providers
-    * Authorization through [Pundit](https://github.com/varvet/pundit)
+1. **Pure Rails:** No proprietary DSLs or "magic". If you know Rails, you know this starter.
+2. **Readability > Cleverness:** Standard patterns over complex abstractions.
+3. **Batteries Included:** Authentication, Multi-tenancy, and UI components are pre-configured.
 
-* Background worker & scheduler
+## Why this starter?
 
-    * Utilizes [solid_queue](https://github.com/rails/solid_queue/)
+* **Zero-Config UI:** Tabler components integrated with Hotwire. Dark mode, responsive layouts, and dashboards work immediately.
+* **Built-in Multi-Tenancy:** "Spaces" support included. Switch between single-user and B2B SaaS modes via config.
+* **Simplified Infrastructure:** Built for Rails 8. Uses `solid_queue` and `solid_cache`—no Redis required for small-to-medium deployments.
+* **Secure:** Pre-loaded with Pundit (AuthZ), Devise (AuthN), and Brakeman security auditing.
 
-* Role management
+## The Stack
 
-    * Standard roles available across spaces
-    * Custom role creation per space
-    * Supports fine grained permissions per role
+* **Core:** Rails 8.0+, Ruby 3.3+, SQLite (Production-optimized).
+* **Auth:** Devise + OmniAuth (Google/GitHub).
+* **UI:** Tabler (Bootstrap 5) + Hotwire/Turbo.
+* **Background Jobs:** Solid Queue / Active Job.
+* **Deployment:** Pre-configured for **Kamal**, Fly.io, or Heroku.
 
-* Multiple user namespaces support
+## Space Management & Architecture
 
-    * Utilizes the `Space` model to represent user namespaces (e.g., teams, organizations).
-    * Example use case for turning on multi-space mode is a saas application
-    * Example use case for turning off multi-space mode is an internal org tool
+The app uses a **Space-based** architecture for teams or organizations.
 
-* Pre built UI layouts
+* **Standard Roles:** Admin and Member roles per space.
+* **Permissions:** Built-in support for custom roles and granular access controls via Pundit.
 
-    * High quality UI elements and layouts from [Tabler](https://tabler.io/)
+## Theming Engine
 
-* Development focussed
+Overhaul the UI via the `AppSettings` singleton. No CSS hunting required. All settings are database-backed and can be modified at runtime.
 
-    * [Annotate](https://github.com/ctran/annotate_models) - Annotate Rails classes with schema and routes info
-    * [Brakeman](https://github.com/presidentbeef/brakeman) - A static analysis security vulnerability scanner
-    * [Byebug](https://github.com/deivid-rodriguez/byebug) - Simple debugger
-    * [Dotenv](https://github.com/bkeepers/dotenv) - Load environment variables from `.env`
+### Visual Configuration
 
-## Setup
+| Category | Setting | Options |
+| --- | --- | --- |
+| **Layout** | `interface_layout` | `VERTICAL`, `VERTICAL-TRANSPARENT`, `OVERLAP`, `CONDENSED`, `HORIZONTAL` |
+| **Mode** | `color_mode` | `LIGHT`, `DARK` |
+| **Primary Color** | `color_scheme` | `BLUE`, `AZURE`, `INDIGO`, `PURPLE`, `PINK`, `RED`, `ORANGE`, `YELLOW`, `LIME`, `GREEN`, `TEAL`, `CYAN` |
+| **Theme** | `theme_base` | `NEUTRAL`, `SLATE`, `ZINC`, `GRAY`, `STONE`, `PINK` |
+| **Typography** | `font_family` | `SANS-SERIF`, `SERIF`, `MONOSPACE`, `COMIC` |
+| **Shapes** | `corner_radius` | `0` to `2` |
 
-To set up the project, ensure you have SQLite installed locally. Use the following commands to install them:
+### Logic Configuration
 
-```
-brew install sqlite3
-```
+| Setting | Default | Description |
+| --- | --- | --- |
+| `multi_tenant_mode` | `true` | Toggle SaaS-style "Spaces" vs. a single-user app. |
+| `show_landing_page` | `true` | Toggle the public marketing page. |
 
-Clone the repo
+---
 
-```
-git clone https://github.com/tarunvelli/rails-tabler-starter.git
-```
+## ⚡ Quick Start
 
-Install the required dependencies using mise or setup the dependencies `.tool-versions` in other preferred method:
-```
-mise install
-```
-
-Set up and run the development server:
-```
+```bash
+# Clone and setup
+git clone https://github.com/tarunvelli/rails-tabler-starter.git my_app
+cd my_app
 bin/setup
+
+# Start server
 bin/dev
+
 ```
 
-To grant administrative privileges to a user and access admin features, run the following in the Rails console:
+**Promote User to Admin:**
+
+```ruby
+User.first.update(admin: true)
+
 ```
-bundle exec rails c
-> User.first.update(admin: true)
-```
 
-## AppSettings
+## Contributing
 
-Toggle app settings at `/setup/edit`
-
-* `AppSettings.interface_layout`
-    * Layout of app
-    * values ["VERTICAL", "VERTICAL-TRANSPARENT", "HORIZONTAL", "OVERLAP", "CONDENSED"]
-
-* `AppSettings.interface_mode`
-    * Light/Dark mode of app
-    * "SYSTEM" picks the mode from system preferences
-    * Values ["LIGHT", "DARK", "SYSTEM"]
-
-* `AppSettings.interface_theme`
-    * Color theme of app
-    * Values ["DEFAULT", "COOL"]
-
-* `AppSettings.login_layout` one of
-    * Layout of login screens
-    * Values ["DEFAULT", "ILLUSTRATION", "COVER"]
-
-* `AppSettings.multi_tenant_mode`
-    * When true allows users to sign up and create spaces
-    * When false allows only admin to invite users and create spaces
-    * Values [true, false]
-
-* `AppSettings.show_landing_page`
-    * When true root path renders landing page
-    * When false root path redirects to sign in page
-    * Values [true, false]
-
-## Deployment
-
-The demo app has been deployed using [Kamal](https://kamal-deploy.org/) on [Hetzner](https://hetzner.cloud/?ref=FGg0y4EJJFLd)
-
-Choose your preferred deployment platform:
-
-* Deploy on [Fly.io](https://fly.io/docs/rails/getting-started/)
-* Deploy on [Heroku](https://devcenter.heroku.com/articles/getting-started-with-rails7)
-
-## Contribution
-
-Contributions to enhance this starter are highly encouraged and welcomed! Feel free to submit pull requests and improve the project collaboratively.
+1. Fork it.
+2. Create your feature branch (`git checkout -b feature/name`).
+3. Commit your changes (`git commit -m 'Add feature'`).
+4. Push to the branch (`git push origin feature/name`).
+5. Open a Pull Request.

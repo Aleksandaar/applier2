@@ -1,4 +1,4 @@
-<body class="d-flex flex-column min-vh-100" data-bs-theme="<%= interface_mode %>">
+<body class="d-flex flex-column min-vh-100">
   <header class="navbar navbar-expand-md navbar-light d-print-none">
     <div class="container-xl">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
@@ -6,7 +6,7 @@
       </button>
       <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
         <a href="/">
-          <%= image_tag "logo.svg", width: "110", height: "32", alt: "Portal", class: "navbar-brand-image" %>
+          <%= inline_svg "logo.svg", width: "110", height: "32", alt: "Portal", class: "navbar-brand-image" %>
         </a>
       </h1>
       <div class="navbar-nav flex-row order-md-last">
@@ -38,12 +38,7 @@
       </div>
       <div class="page-body">
         <div class="container-xl">
-          <% if notice %>
-            <p class="alert alert-success alert-dismissible"><%= notice %></p>
-          <% end %>
-          <% if alert %>
-            <p class="alert alert-danger alert-dismissible"><%= alert %></p>
-          <% end %>
+          <%= render 'common/flash' %>
           <%= yield %>
         </div>
       </div>

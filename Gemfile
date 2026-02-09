@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 8.0.0"
+gem "rails", "~> 8.1.0"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
 # Use sqlite3 as the database for Active Record
@@ -17,7 +17,7 @@ gem "stimulus-rails"
 # Bundle and process CSS [https://github.com/rails/cssbundling-rails]
 gem "cssbundling-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
-gem "jbuilder"
+gem "jbuilder", require: false
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 gem "bcrypt", "~> 3.1.7"
@@ -80,6 +80,9 @@ group :development, :test do
 
   # Debugging tool [https://github.com/deivid-rodriguez/byebug]
   gem "byebug"
+
+  # N+1 query detection [https://github.com/flyerhzm/bullet]
+  gem "bullet"
 end
 
 group :development do
@@ -87,6 +90,11 @@ group :development do
   gem "web-console"
 
   gem "ruby-lsp-rspec", require: false
+
+  # Profiling tools
+  gem "rack-mini-profiler", require: false
+  gem "memory_profiler"
+  gem "stackprof"
 end
 
 group :test do
