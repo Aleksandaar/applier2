@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   before_action :set_main_space, only: [ :landing ]
   before_action :redirect_signed_in_user, only: [ :landing ]
 
+  layout "logged"
   layout "plain", only: [ :landing ]
 
   def landing; end

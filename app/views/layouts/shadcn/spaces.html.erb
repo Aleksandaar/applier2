@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" class="light layout-full" style="color-scheme: light;">
+  <head>
+    <title>YourApp</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="utf-8">
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <!-- Tailwind v4 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+
+  <body class="group/body overscroll-none antialiased theme-default bg-background">
+
+    <div class="flex min-h-screen w-full">
+
+      <%= render "layouts/shadcn/spaces/sidebar" %>
+
+      <!-- Main content -->
+      <main class="flex-1 p-6">
+        <%= render "layouts/shadcn/spaces/breadcrumb" %>
+
+        <%= yield %>
+      </main>
+
+    </div>
+  </body>
+</html>

@@ -4,6 +4,8 @@ class SpacesController < ApplicationController
   before_action :set_space, only: %i[ show edit update destroy ]
   before_action :check_multi_tenant_mode, only: %i[new index]
 
+  layout "shadcn/spaces"
+
   def index
     @spaces = current_user.spaces.page params[:page]
   end
