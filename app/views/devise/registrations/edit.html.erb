@@ -1,39 +1,102 @@
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put, class: "card card-md" }, data: { turbo: false }) do |f| %>
-  <div class="card-body">
-    <%= render "devise/shared/error_messages", resource: resource %>
-    <h2 class="card-title text-center mb-4">Change password</h2>
-    <div class="mb-3">
-      <label class="form-label">Email address</label>
-      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <em>Currently waiting confirmation for: <%= resource.unconfirmed_email %></em>
-      <% end %>
-      <div class="input-group input-group-flat">
-        <%= f.email_field :email, class: "form-control", placeholder: "Enter email", disabled: true %>
+<div class="flex items-center justify-center py-10">
+  <div class="w-full max-w-md">
+    <%= form_for(resource,
+        as: resource_name,
+        url: registration_path(resource_name),
+        html: { method: :put },
+        data: { turbo: false }) do |f| %>
+
+      <div class="rounded-xl border bg-card text-card-foreground shadow-sm">
+
+        <!-- Header -->
+        <div class="flex flex-col space-y-1.5 p-6 text-center">
+          <h2 class="text-2xl font-semibold tracking-tight">
+            Change password
+          </h2>
+        </div>
+
+        <!-- Body -->
+        <div class="p-6 pt-0 space-y-4">
+          <%= render "devise/shared/error_messages", resource: resource %>
+          <!-- Email -->
+          <div class="grid gap-2">
+            <label class="text-sm font-medium leading-none">
+              Email address
+            </label>
+
+            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+              <p class="text-xs text-muted-foreground">
+                Currently waiting confirmation for:
+                <%= resource.unconfirmed_email %>
+              </p>
+            <% end %>
+
+            <%= f.email_field :email,
+              disabled: true,
+              class: "flex h-10 w-full rounded-md border border-input bg-muted px-3 py-2 text-sm
+                      placeholder:text-muted-foreground
+                      focus-visible:outline-none focus-visible:ring-2
+                      focus-visible:ring-ring focus-visible:ring-offset-2
+                      disabled:cursor-not-allowed disabled:opacity-50" %>
+          </div>
+          <!-- Current Password -->
+          <div class="grid gap-2">
+            <label class="text-sm font-medium leading-none">
+              Current password
+            </label>
+            <%= f.password_field :current_password,
+              autofocus: true,
+              autocomplete: "current-password",
+              class: "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm
+                      placeholder:text-muted-foreground
+                      focus-visible:outline-none focus-visible:ring-2
+                      focus-visible:ring-ring focus-visible:ring-offset-2" %>
+          </div>
+          <!-- New Password -->
+          <div class="grid gap-2">
+            <label class="text-sm font-medium leading-none">
+              New password
+            </label>
+            <%= f.password_field :password,
+              autocomplete: "new-password",
+              class: "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm
+                      placeholder:text-muted-foreground
+                      focus-visible:outline-none focus-visible:ring-2
+                      focus-visible:ring-ring focus-visible:ring-offset-2" %>
+          </div>
+          <!-- Confirm Password -->
+          <div class="grid gap-2">
+            <label class="text-sm font-medium leading-none">
+              Confirm new password
+            </label>
+            <%= f.password_field :password_confirmation,
+              autocomplete: "new-password",
+              class: "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm
+                      placeholder:text-muted-foreground
+                      focus-visible:outline-none focus-visible:ring-2
+                      focus-visible:ring-ring focus-visible:ring-offset-2" %>
+          </div>
+        </div>
+        <!-- Footer -->
+        <div class="p-6 pt-0 flex flex-col gap-3">
+
+          <%= f.submit "Update",
+            class: "inline-flex items-center justify-center rounded-md text-sm font-medium
+                    transition-colors focus-visible:outline-none focus-visible:ring-2
+                    focus-visible:ring-ring focus-visible:ring-offset-2
+                    disabled:pointer-events-none disabled:opacity-50
+                    bg-primary text-primary-foreground hover:bg-primary/90
+                    h-10 px-4 py-2 w-full" %>
+
+          <%= link_to "Back",
+                request.referer || root_path,
+                class: "inline-flex items-center justify-center rounded-md text-sm font-medium
+                        transition-colors focus-visible:outline-none focus-visible:ring-2
+                        focus-visible:ring-ring focus-visible:ring-offset-2
+                        border border-input bg-background hover:bg-accent hover:text-accent-foreground
+                        h-10 px-4 py-2 w-full" %>
+        </div>
       </div>
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Current password</label>
-      <div class="input-group input-group-flat">
-        <%= f.password_field :current_password, class: "form-control", placeholder: "Password", autofocus: true, autocomplete: "current-password" %>
-      </div>
-    </div>
-    <div class="mb-3">
-      <label class="form-label">New password</label>
-      <div class="input-group input-group-flat">
-        <%= f.password_field :password, class: "form-control", placeholder: "Password", autocomplete: "new-password" %>
-      </div>
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Confirm new password</label>
-      <div class="input-group input-group-flat">
-        <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Password", autocomplete: "new-password" %>
-      </div>
-    </div>
-    <div class="form-footer">
-      <%= f.submit "Update", class: "btn btn-primary w-100" %>
-    </div>
-    <div class="text-center text-muted mt-3">
-      <%= link_to "Back", :back, class: "btn btn-primary w-100" %>
-    </div>
+    <% end %>
   </div>
-<% end %>
+</div>
